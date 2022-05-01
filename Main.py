@@ -16,6 +16,5 @@ async def on_ready():
 async def on_message(message):
     if message.content == 'developers':
         await message.channel.send(f"{zet} \n {seby}")
-        #merge
-
+        
 client.run(TOKEN)
