@@ -1,0 +1,5 @@
+thumbs_down = "👎"
+thumbs_up = "👍"
+heart = "♥"
+goat = "🐐"
+fuck_you = "🖕"
