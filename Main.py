@@ -1,7 +1,7 @@
 import discord
 import emoji
 import time
-TOKEN = ''
+TOKEN = 'OTcwMjAyMjM5NDc2MDcyNDY4.Ym4hPw.s34L6pxKw8AzSzF4Cnxni9mTYiY'
 
 client = discord.Client()
 
