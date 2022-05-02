@@ -5,7 +5,7 @@ from variables.credits import *
 import asyncio
 import time
 
-TOKEN = 'OTcwMjAyMjM5NDc2MDcyNDY4.Ym4hPw.skcw7GzRu1A15veIUQj0djrDHZw'
+TOKEN = ''
 
 client = discord.Client()
 
@@ -27,9 +27,6 @@ async def on_message(message):
     
     if str(message.content).lower() == 'salut':
         await message.channel.send("Salut! :)")
-
-    if message.content == :
-            await message.channel.send("Du-te'n pizda mamii mele")
     
 
 
