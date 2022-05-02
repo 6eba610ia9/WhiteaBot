@@ -1,10 +1,11 @@
 import discord
+from discord.ext import commands
 import variables.emoji as emoji
 from variables.credits import *
+from variables.token import *
 import asyncio
 import time
 
-TOKEN = ''
 
 client = discord.Client()
 
@@ -26,6 +27,7 @@ async def on_message(message):
     
     if str(message.content).lower() == 'salut':
         await message.channel.send("Salut! :)")
+        await message.add_reaction(emoji.heart)
     
 
 
