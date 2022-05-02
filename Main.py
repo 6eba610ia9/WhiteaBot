@@ -1,3 +1,4 @@
+from ctypes.wintypes import WORD
 import discord
 from discord.ext import commands
 import variables.emoji as emoji
@@ -10,7 +11,7 @@ import time
 client = discord.Client()
 
 
-
+salut = "Salute"
 
 #mesaj logare bot - NU EDITA NIMIC!
 @client.event
@@ -37,3 +38,4 @@ async def on_message(message):
 
 
 client.run(TOKEN)
+#modificare
