@@ -1,41 +1,64 @@
-from ctypes.wintypes import WORD
 import discord
 from discord.ext import commands
-import variables.emoji as emoji
-from variables.credits import *
-from variables.token import *
-import asyncio
-import time
+from variables.token import TOKEN
+from variables.prefix import PREFIX
+from bs4 import BeautifulSoup
+import requests, re
+import json
+from time import sleep
 
 
-client = discord.Client()
-
-
-salut = "Salute"
+# client = discord.Client()
+client = commands.Bot(command_prefix=PREFIX)
 
 #mesaj logare bot - NU EDITA NIMIC!
 @client.event
 async def on_ready():
-    print('Ne-am logat ca {0.user}'.format(client))
+    guild = discord.utils.get(client.guilds)
+    print(
+        f'{client.user} is connected to the following guild:\n'
+    )
 
 
-
-#Fraze de bun venit
-@client.event
-async def on_message(message):
-    if str(message.content).lower() == 'hey':
-        await message.channel.send("Bunăăă ♥")
+# @client.command(aliases=['instagram', 'ig', 'insta'])
+# async def _instagram(ctx, username):
+#     user = username.replace('@', "")
     
-    if str(message.content).lower() == 'salut':
-        await message.channel.send("Salut! :)")
-        await message.add_reaction(emoji.heart)
-    
+#     url = f'https://www.instagram.com/{user}/?__a=1&__d=dis'
+#     request = requests.get(url)
+#     json = request.json()
+#     followers = json
+#     print(followers)
+#     # await ctx.send(json_data)
 
 
-#comenzi bot
-    if message.content == '*developers':
-        await message.channel.send(f"{zet, emoji.heart} \n {seby, emoji.heart}")
+def hentai_image(id, page):
+    url = f"https://t.dogehls.xyz/galleries/{id}/{page}.jpg"
+    return url
+
+@client.command(aliases=['nhentai', 'hentai', 'hanime'])
+async def _nhentai(ctx, id):
+    url = f"https://nhentai.to/g/{id}/1"
+    request = requests.get(url)
+
+    if request.status_code == 200:
+        html = request.text
+        soup = BeautifulSoup(html, "html.parser")
+        script = soup.find_all("script")[4].text
+        regex = re.search(r"gallery: {.*?},(\s+)(\w)", script, re.DOTALL).group(0)[9:-20]
+        json = json.loads(regex + "}")
+        
+        title = json["title"]["english"]
+        media_id = title = json["media_id"]
+        num_pages = json["num_pages"]
+        print(json)
+        for page in range (1, num_pages):
+            image = hentai_image(id=media_id, page=page)
+            await ctx.send(image)
+            
+    else:
+        await ctx.send("Hentai not found...")
+
 
 
 client.run(TOKEN)
-#modificare
