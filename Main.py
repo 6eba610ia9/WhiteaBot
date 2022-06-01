@@ -16,14 +16,14 @@ client = commands.Bot(command_prefix=PREFIX)
 async def on_ready():
     guild = discord.utils.get(client.guilds)
     print(
-        f'{client.user} is connected to the following guild:\n'
+        f'{client.user} is connected\n'
     )
 
 
 # @client.command(aliases=['instagram', 'ig', 'insta'])
 # async def _instagram(ctx, username):
 #     user = username.replace('@', "")
-    
+
 #     url = f'https://www.instagram.com/{user}/?__a=1&__d=dis'
 #     request = requests.get(url)
 #     json = request.json()
