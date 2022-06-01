@@ -20,6 +20,7 @@ async def on_ready():
     )
 
 
+
 # @client.command(aliases=['instagram', 'ig', 'insta'])
 # async def _instagram(ctx, username):
 #     user = username.replace('@', "")
