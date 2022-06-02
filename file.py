@@ -1,12 +1,14 @@
 import requests 
+from bs4 import BeautifulSoup
 
-def ig(username):
+def instagram(username):
     user = username.replace('@', "")
-    
+
     url = f'https://www.instagram.com/{user}/?__a=1&__d=dis'
-    agent = {"User-Agent":"Mozilla/5.0"}
-    request = requests.get(url, headers=agent)
-    json = request.json()
+    request = requests.get(url)
+    html = BeautifulSoup(request, 'html.parser').find_all("div").text
+    json = request.text
     followers = json
-    print(followers)
-ig("justzetu")
+    print(html)
+
+instagram('justzetu')

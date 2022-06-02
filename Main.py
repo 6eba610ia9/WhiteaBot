@@ -21,16 +21,16 @@ async def on_ready():
 
 
 
-# @client.command(aliases=['instagram', 'ig', 'insta'])
-# async def _instagram(ctx, username):
-#     user = username.replace('@', "")
+@client.command(aliases=['instagram', 'ig', 'insta'])
+async def _instagram(ctx, username):
+    user = username.replace('@', "")
 
-#     url = f'https://www.instagram.com/{user}/?__a=1&__d=dis'
-#     request = requests.get(url)
-#     json = request.json()
-#     followers = json
-#     print(followers)
-#     # await ctx.send(json_data)
+    url = f'https://www.instagram.com/{user}/?__a=1&__d=dis'
+    request = requests.get(url)
+    json = request.json()
+    followers = json
+    print(followers)
+    # await ctx.send(json_data)
 
 
 def hentai_image(id, page):
