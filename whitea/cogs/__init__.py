@@ -1,1 +1,1 @@
-from .neko import *
+from .neko import neko

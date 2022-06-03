@@ -1,2 +1,4 @@
 whitea/variables/token.py
 bot-venv
+__pycache__
+whitea/cogs/__pycache__
