@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
-from variables.token import TOKEN
-from variables.prefix import PREFIX
+from whitea.variables.token import TOKEN
+from whitea.variables.prefix import PREFIX
 from bs4 import BeautifulSoup
 import requests, re
 import json
