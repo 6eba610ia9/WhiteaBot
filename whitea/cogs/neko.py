@@ -3,21 +3,23 @@ from discord.ext import commands
 import requests, re
 from bs4 import BeautifulSoup
 import json
+from datetime import datetime
 
 
-class Neko():
+class Neko:
     
-    def __init__(self, bot):
-        """ Initialize Cat Class"""
-
+    def __init__(self, bot, id):
+        """ Initialize Class"""
+        self.id = id
         self.bot = bot
+
         
-        
-    def neko_image(self, id, page):
-        url = f"https://t.dogehls.xyz/galleries/{id}/{page}.jpg"
+    def neko_image(self, media_id, page=1):
+        url = f"https://t.dogehls.xyz/galleries/{media_id}/{page}.jpg"
         return url
 
-    def neko_api(self, id):
+    def neko_api(self):
+        id = self.id
         url = f"https://nhentai.to/g/{id}/1"
         request = requests.get(url)
         if request.status_code == 200:
@@ -32,40 +34,55 @@ class Neko():
             return "404"
     
     
-    def types(api):
-        len_type = len(api["tags"])
-        all_tags = {}
-        for count in range(len_type):
-            type = api["tags"][count]["type"]
-            name = api["tags"][count]["name"]
-            tags = {f"{type}" : f"{name}"}
-            all_tags.update(tags)
-        return(all_tags)
-    
-    
-    async def neko_data(self, ctx, id):
-            api = self.neko_api(id)
-            title = api["title"]["english"]
-            media_id = api["media_id"]
-            num_pages = api["num_pages"]
-            
+    def thubnail_embed(self):
+        
+        api = self.neko_api()
+        title = api["title"]["pretty"]
+        title_japanese = api["title"]["japanese"]
+        
+        media_id = api["media_id"]
+        num_pages = api["num_pages"]
+        # Upload date formated
+        upload_epoch = api["upload_date"]
+        upload_date = datetime.fromtimestamp(upload_epoch)
+        upload_date.strftime("%m/%d/%Y, %H:%M:%S")
+        
+        thubnail = self.neko_image(media_id=media_id)
+        
+        embed = discord.Embed(
+            title = title,
+            description = f"[{title_japanese}](https://nhentai.to/g/{self.id})",
+            color = 0x89CFF0
+        )
+        
+        embed.set_thumbnail(url=thubnail)
+        embed.add_field(name="Num pages", value=num_pages, inline=False)
+        embed.add_field(name="Uploaded at", value=upload_date, inline=False)
+        
+        for tag in api["tags"]:
+            embed.add_field(name=tag["type"], value=tag["name"], inline=True)
+        
+        return embed
+                        
 
+    async def neko_data(self, ctx):
+            api = self.neko_api()
+            num_pages = api["num_pages"]
+            media_id = api["media_id"]
             
-            for page in range (1, num_pages):
-                image = self.neko_image(id=media_id, page=page)
-                            
-                description = discord.Embed(title=title,
-                                            description=image,
-                                            color=0x89CFF0)
                 
+            for page in range (1, num_pages):
+                image = self.neko_image(media_id=media_id, page=page)
+                embed = self.thubnail_embed()
+
                 if page == 1:
-                    img = ctx.send(embed=description)
+                    img = ctx.send(embed=embed)
                     return img
                 else: 
                     img.edit(content=image)
 
-                    await img.add_reaction("⬅️")
-                    await img.add_reaction("➡️")
+                    img.add_reaction("⬅️")
+                    img.add_reaction("➡️")
                 
                 valid_reactions = ["⬅️", "➡️"]
 
@@ -75,4 +92,6 @@ class Neko():
 
                 if str(reaction.emoji) == "➡️":
                     continue
+                
+                
                 
