@@ -9,11 +9,22 @@ def WIP():
     )
 def about():
     """About Whitea and discord server."""
-    return discord.Embed(
-        type="rich",             
-        title="[🍵 Whitea]('https://github.com/6eba610ia9/WhiteaBot')",
-        description="This is first open source discord bot!",
-        color=0xe8e9f0,
-        footer="Copyright free",        
-        thubnail="https://i.imgflip.com/3ybq17.jpg"         
+    embed =  discord.Embed(       
+        title="Whitea",
+        description="[Open source discord bot.](https://github.com/6eba610ia9/WhiteaBot)",
+        color=0xe8e9f0,     
     )
+    embed.set_thumbnail(url="https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/whitea/assets/whitea.jpg")
+    embed.add_field(name="-capybara",
+                    value="Generate a random capybara image.",
+                    inline=True
+                    )
+    embed.add_field(name="-neko (id)",
+                    value="Generate images with specifyed neko id.",
+                    inline=True
+                    )
+    embed.set_footer(
+        text="Whitea bot.",
+        icon_url="https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/whitea/assets/whitea_rounded.png"
+    )
+    return embed

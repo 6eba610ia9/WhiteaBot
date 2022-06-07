@@ -5,9 +5,10 @@ from variables.prefix import PREFIX
 from bs4 import BeautifulSoup
 import requests, re
 import json
-from time import sleep
-from cogs import capybara
 from tools import messages, embed
+from cogs.neko import Neko
+from cogs.capybara import Capybara
+from tools import messages 
 
 bot = commands.Bot(command_prefix=PREFIX, help_command=None)
 
@@ -15,11 +16,13 @@ bot = commands.Bot(command_prefix=PREFIX, help_command=None)
 @bot.event
 async def on_ready():
     print(
-        f'{bot.user} is connected\n'
+        
+        f'{bot.user} is connected!\n'
+        f'Prefix : {bot.command_prefix}'
     )
-
-
-
+@bot.command()
+async def about(ctx):
+    await ctx.send(embed= messages.about())
 
 @bot.command(aliases=['news', 'github', 'source', 'features', 'info'])
 async def _info(ctx):
@@ -27,7 +30,7 @@ async def _info(ctx):
 
 @bot.command()
 async def help(ctx):
-    await ctx.send(embed=embed.newembed("Naifyon este un lenes, mai are 13 zile pana la bac si el sta pe discord "))
+    await ctx.send(embed=embed.newembed("This will be the help message"))
 
 @bot.command()
 async def zet(ctx):
@@ -58,32 +61,31 @@ async def _neko(ctx, id):
         media_id = api["media_id"]
         num_pages = api["num_pages"]
         
-        def types():
+        def types(count):
             
-            len_type = len(api["tags"])
-            all_tags = {}
-            for count in range(len_type):
-                type = api["tags"][count]["type"]
-                name = api["tags"][count]["name"]
-                tags = {f"{type}" : f"{name}"}
-                all_tags.update(tags)
-            return(all_tags)
+            type = api["tags"][count]["type"]
+            name = api["tags"][count]["name"]
+            
+            return type, name
         
-        description = discord.Embed(title=title,
-                                    description=f"{types()}", 
-                                    color=0x89CFF0)
-        
-        for page in range (0, num_pages):
+        for page in range (1, num_pages):
             image = hentai_image(id=media_id, page=page)
-            if page == 0:
-                await ctx.send(embed=description)
-            elif page == 1:
-                img = await ctx.send(image)
+            
+            embed = discord.Embed(title=title,
+                            color=0x89CFF0)
+            embed.set_thumbnail(url=image)
+            embed.add_field(name="Num pages:", value=num_pages, inline=True)
+            
+            for tag in api["tags"]:
+                embed.add_field(name=tag["type"], value=tag["name"], inline=True)
+                
+                
+            if page == 1:
+                img = await ctx.send(embed=embed)
             else: 
                 await img.edit(content=image)
-
-            await img.add_reaction("⬅️")
-            await img.add_reaction("➡️")
+                await img.add_reaction("⬅️")
+                await img.add_reaction("➡️")
             
             valid_reactions = ["⬅️", "➡️"]
 
@@ -98,7 +100,6 @@ async def _neko(ctx, id):
         await ctx.send("Neko not found...")
 
 
-
 @bot.command(aliases = ["capybara"])
 async def _capybara(ctx):
     """
@@ -106,6 +107,12 @@ async def _capybara(ctx):
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     """
     
-    await capybara.capybara(ctx)
+    await Capybara().capybara(ctx=ctx)
+    
 
+@bot.command()
+async def nekko(ctx, id):
+    hentai = Neko(bot=bot).neko_data(ctx=ctx, id=id)
+    await ctx.send(hentai)
+    
 bot.run(TOKEN)
