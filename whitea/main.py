@@ -62,7 +62,7 @@ async def _capybara(ctx):
 @bot.command()
 async def gay(ctx):
     procents = random.randint(0,100)
-    await ctx.send(embed=embed.newembed(f"{ctx.author} is {procents}% gay" ))
+    await ctx.send(embed=embed.newembed(f"{ctx.author} este {procents}% gay ❤️" ))
 
 @bot.command()
 async def run(ctx, params):
