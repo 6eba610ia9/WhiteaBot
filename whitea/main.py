@@ -1,4 +1,6 @@
+from email import generator
 import discord
+import random
 from discord.ext import commands
 from variables.token import TOKEN
 from variables.prefix import PREFIX
@@ -8,7 +10,7 @@ import json
 from tools import messages, embed
 from cogs.neko import Neko
 from cogs.capybara import Capybara
-from tools import messages 
+from tools import messages
 
 bot = commands.Bot(command_prefix=PREFIX, help_command=None)
 
@@ -58,8 +60,14 @@ async def _capybara(ctx):
 
 
 @bot.command()
+async def gay(ctx):
+    procents = random.randint(0,100)
+    await ctx.send(embed=embed.newembed(f"{ctx.author} is {procents}% gay" ))
+
+@bot.command()
 async def run(ctx, params):
     await ctx.send(params)
+
 
         
 bot.run(TOKEN)
