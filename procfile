@@ -1,1 +1,1 @@
-worker: python Teapot.py
+worker: python whitea.py

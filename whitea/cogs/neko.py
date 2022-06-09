@@ -1,97 +1,96 @@
+import requests
 import discord
 from discord.ext import commands
-import requests, re
-from bs4 import BeautifulSoup
-import json
-from datetime import datetime
 
 
-class Neko:
-    
-    def __init__(self, bot, id):
-        """ Initialize Class"""
-        self.id = id
+
+class Neko():
+    def __init__(self, bot):
         self.bot = bot
-
         
-    def neko_image(self, media_id, page=1):
-        url = f"https://t.dogehls.xyz/galleries/{media_id}/{page}.jpg"
-        return url
+        
+    def newembed(text, c=0x428DFF):
+        em = discord.Embed(colour=c)
+        em.set_footer(text=text,
+                    icon_url="https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/whitea/assets/whitea_rounded.png")
 
-    def neko_api(self):
-        id = self.id
-        url = f"https://nhentai.to/g/{id}/1"
-        request = requests.get(url)
-        if request.status_code == 200:
-            html = request.text
-            soup = BeautifulSoup(html, "html.parser")
-            script = soup.find_all("script")[4].text
-            regex = re.search(r"gallery: {.*?},(\s+)(\w)", script, re.DOTALL).group(0)[9:-20]
-            api = json.loads(regex + "}")
-            return api
-            
-        else:
-            return "404"
+        return em
     
-    
-    def thubnail_embed(self):
-        
-        api = self.neko_api()
-        title = api["title"]["pretty"]
-        title_japanese = api["title"]["japanese"]
-        
-        media_id = api["media_id"]
-        num_pages = api["num_pages"]
-        # Upload date formated
-        upload_epoch = api["upload_date"]
-        upload_date = datetime.fromtimestamp(upload_epoch)
-        upload_date.strftime("%m/%d/%Y, %H:%M:%S")
-        
-        thubnail = self.neko_image(media_id=media_id)
-        
-        embed = discord.Embed(
-            title = title,
-            description = f"[{title_japanese}](https://nhentai.to/g/{self.id})",
-            color = 0x89CFF0
-        )
-        
-        embed.set_thumbnail(url=thubnail)
-        embed.add_field(name="Num pages", value=num_pages, inline=False)
-        embed.add_field(name="Uploaded at", value=upload_date, inline=False)
-        
-        for tag in api["tags"]:
-            embed.add_field(name=tag["type"], value=tag["name"], inline=True)
-        
-        return embed
-                        
+    def error(self, e="executing command"):
+        return discord.Embed(title=f"⚠ Unknown error occurred while {e}!",
+                         description="Please report to [Teapot.py](https://github.com/RedCokeDevelopment/Teapot.py) developers [here](https://github.com/RedCokeDevelopment/Teapot.py/issues)!",
+                         color=0xFF0000)
 
-    async def neko_data(self, ctx):
-            api = self.neko_api()
-            num_pages = api["num_pages"]
-            media_id = api["media_id"]
-            
-                
-            for page in range (1, num_pages):
-                image = self.neko_image(media_id=media_id, page=page)
-                embed = self.thubnail_embed()
 
-                if page == 1:
-                    img = ctx.send(embed=embed)
-                    return img
-                else: 
-                    img.edit(content=image)
+    def neko_api(self, ctx, x):
+        try:
+            req = requests.get(f'https://nekos.life/api/v2/img/{x}')
+            if req.status_code != 200:
+                print("Could not get a neko")
+            apijson = req.json()
+            url = apijson["url"]
+            em = self.newembed().set_image(url=url)
+            return em
+        except:
+            return self.error(f"obtaining image ({req.status_code})")
 
-                    img.add_reaction("⬅️")
-                    img.add_reaction("➡️")
-                
-                valid_reactions = ["⬅️", "➡️"]
+    @commands.command()
+    async def neko(self, ctx):
+        await ctx.send(embed=self.neko_api(ctx, "neko"))
 
-                def check(reaction, user):
-                    return user == ctx.author and str(reaction.emoji) in valid_reactions
-                reaction, user = await self.bot.wait_for('reaction_add', timeout=60.0, check=check)
+    @commands.command()
+    async def waifu(self, ctx):
+        await ctx.send(embed=self.neko_api(ctx, "waifu"))
 
-                if str(reaction.emoji) == "➡️":
-                    continue
-                
-                
-                
+    @commands.command()
+    async def avatar(self, ctx):
+        await ctx.send(embed=self.neko_api(ctx, "avatar"))
+
+    @commands.command()
+    async def wallpaper(self, ctx):
+        await ctx.send(embed=self.neko_api(ctx, "wallpaper"))
+
+    @commands.command()
+    async def tickle(self, ctx):
+        await ctx.send(embed=self.neko_api(ctx, "tickle"))
+
+    @commands.command()
+    async def poke(self, ctx):
+        await ctx.send(embed=self.neko_api(ctx, "poke"))
+
+    @commands.command()
+    async def kiss(self, ctx):
+        await ctx.send(embed=self.neko_api(ctx, "kiss"))
+
+    @commands.command(aliases=['8ball'])
+    async def eightball(self, ctx):
+        await ctx.send(embed=self.neko_api(ctx, "8ball"))
+
+    @commands.command()
+    async def lizard(self, ctx):
+        await ctx.send(embed=self.neko_api(ctx, "lizard"))
+
+    @commands.command()
+    async def slap(self, ctx):
+        await ctx.send(embed=self.neko_api(ctx, "slap"))
+
+    @commands.command()
+    async def cuddle(self, ctx):
+        await ctx.send(embed=self.neko_api(ctx, "cuddle"))
+
+    @commands.command()
+    async def goose(self, ctx):
+        await ctx.send(embed=self.neko_api(ctx, "goose"))
+
+    @commands.command()
+    async def fox_girl(self, ctx):
+        await ctx.send(embed=self.neko_api(ctx, "fox_girl"))
+
+    @commands.command()
+    async def baka(self, ctx):
+        await ctx.send(embed=self.neko_api(ctx, "baka"))
+        
+        
+def setup(bot):
+    """ Setup Neko Module"""
+    bot.add_cog(Neko(bot))

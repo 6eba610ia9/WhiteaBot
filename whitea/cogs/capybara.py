@@ -22,7 +22,7 @@ class Capybara():
         capybara_title = images[random_url]['title']
         return capybara_image, capybara_title
     
-    # For return 
+    
     def capybara(self, ctx):
         url = self.query_capybara()
         embed = discord.Embed(color = 0xf7f1e3,
