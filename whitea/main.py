@@ -1,4 +1,3 @@
-from email import generator
 import discord
 import random
 from discord.ext import commands
@@ -10,7 +9,6 @@ import json
 from tools import messages, embed
 from cogs.hentai import Hentai
 from cogs.capybara import Capybara
-from tools import messages
 
 activity = discord.Activity(type=discord.ActivityType.watching, name="sexy capybara")
 
@@ -20,7 +18,7 @@ bot = commands.Bot(command_prefix=PREFIX,
                    activity=activity)
 
 
-#mesaj logare bot - NU EDITA NIMIC!
+
 @bot.event
 async def on_ready():
     print(
@@ -80,16 +78,13 @@ async def neko(ctx):
 @bot.command()
 async def gay(ctx):
     procents = random.randint(0,100)
-    await ctx.send(embed=embed.newembed(f"{ctx.author} este {procents}% gay ❤️" ))
+    
+    message = await ctx.send(embed=embed.newembed(description=f" {ctx.author.name} is {procents}% gay lol  " ))
+    await message.add_reaction("🏳️‍🌈")
 
 @bot.command()
 async def run(ctx, params):
     await ctx.send(params)
 
 
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> 1e2856bf4eeca48cfd7ee86cc30b81f3889d5a84
 bot.run(TOKEN)

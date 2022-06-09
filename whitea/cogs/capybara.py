@@ -26,6 +26,6 @@ class Capybara():
     def capybara(self, ctx):
         url = self.query_capybara()
         embed = discord.Embed(color = 0xf7f1e3,
-                              title = url[1])
+                              title = f"<:capybara:983651457549086741> {url[1]}")
         embed.set_image(url = url[0])
         return ctx.send(embed=embed)
