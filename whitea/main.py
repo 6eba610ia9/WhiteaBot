@@ -1,4 +1,6 @@
+from email import generator
 import discord
+import random
 from discord.ext import commands
 from variables.token import TOKEN
 from variables.prefix import PREFIX
@@ -8,7 +10,7 @@ import json
 from tools import messages, embed
 from cogs.hentai import Hentai
 from cogs.capybara import Capybara
-from tools import messages 
+from tools import messages
 
 activity = discord.Activity(type=discord.ActivityType.watching, name="sexy capybara")
 
@@ -76,9 +78,18 @@ async def neko(ctx):
     await ctx.send(neko)
     
 @bot.command()
+async def gay(ctx):
+    procents = random.randint(0,100)
+    await ctx.send(embed=embed.newembed(f"{ctx.author} este {procents}% gay ❤️" ))
+
+@bot.command()
 async def run(ctx, params):
     await ctx.send(params)
 
 
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 1e2856bf4eeca48cfd7ee86cc30b81f3889d5a84
 bot.run(TOKEN)
