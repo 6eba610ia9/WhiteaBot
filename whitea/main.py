@@ -58,7 +58,7 @@ async def sebastian(ctx):
     """Sebastian"""
     sebastian =  discord.Embed(title="Support Developer ❤️",
                          description="Follow on [Insta]("
-                                     "https://www.instagram.com/sebasti4n.exe/) ❤️", color=0x89CFF0)
+                                     "https://www.instagram.com/sebasti4n.exe/) ❤️ ", color=0x89CFF0)
     await ctx.send(embed=sebastian)
 
 
