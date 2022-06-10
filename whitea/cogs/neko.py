@@ -9,16 +9,16 @@ class Neko(commands.Cog):
         self.bot = bot
         
         
-    def newembed(text, c=0x428DFF):
-        em = discord.Embed(colour=c)
-        em.set_footer(text=text,
+    def newembed(self, text):
+        em = discord.Embed(colour=discord.Colour.random())
+        em.set_footer(text=f"Here's your {text}",
                     icon_url="https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/whitea/assets/whitea_rounded.png")
 
         return em
     
     def error(self, e="executing command"):
         return discord.Embed(title=f"⚠ Unknown error occurred while {e}!",
-                         description="Please report to [Teapot.py](https://github.com/RedCokeDevelopment/Teapot.py) developers [here](https://github.com/RedCokeDevelopment/Teapot.py/issues)!",
+                         description="Please report to [Whitea.py](https://github.com/6eba610ia9/WhiteaBot)!",
                          color=0xFF0000)
 
 
@@ -29,7 +29,7 @@ class Neko(commands.Cog):
                 print("Could not get a neko")
             apijson = req.json()
             url = apijson["url"]
-            em = self.newembed().set_image(url=url)
+            em = self.newembed(text=x).set_image(url=url)
             return em
         except:
             return self.error(f"obtaining image ({req.status_code})")
