@@ -20,7 +20,6 @@ bot = commands.Bot(command_prefix=PREFIX,
 async def load(ctx, extension):
     bot.load_extension(f'cogs.{extension}')
 
-    
 @bot.command()
 async def unload(ctx, extension):
     bot.unload_extension(f'cogs.{extension}')
@@ -28,7 +27,6 @@ async def unload(ctx, extension):
 for filename in os.listdir('./whitea/cogs'):
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
-
 
 
 
