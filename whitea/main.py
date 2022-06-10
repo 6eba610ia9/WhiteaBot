@@ -98,6 +98,7 @@ async def meme(ctx):
     meme = discord.Embed(title=f"{data['title']}", Color = discord.Color.random()).set_image(url=f"{data['url']}")
     await ctx.reply(embed=meme)
 
+
 @bot.command()
 async def run(ctx, params):
     await ctx.send(params)
