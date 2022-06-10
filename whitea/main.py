@@ -5,6 +5,7 @@ from variables.token import TOKEN
 from variables.prefix import PREFIX
 from bs4 import BeautifulSoup
 import requests, re
+from requests import get
 import json
 from tools import messages, embed
 from cogs.hentai import Hentai
@@ -81,6 +82,13 @@ async def gay(ctx):
     
     message = await ctx.send(embed=embed.newembed(description=f" {ctx.author.name} is {procents}% gay lol  " ))
     await message.add_reaction("🏳️‍🌈")
+
+@bot.command()
+async def meme(ctx):
+    content = get("https://meme-api.herokuapp.com/gimme").text
+    data = json.loads(content,)
+    meme = discord.Embed(title=f"{data['title']}", Color = discord.Color.random()).set_image(url=f"{data['url']}")
+    await ctx.reply(embed=meme)
 
 @bot.command()
 async def run(ctx, params):
