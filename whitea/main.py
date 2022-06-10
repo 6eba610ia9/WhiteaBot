@@ -53,6 +53,14 @@ async def zet(ctx):
                                      "https://i.imgflip.com/3ybq17.jpg) to see 👀", color=0x89CFF0)
     await ctx.send(embed=zet)
 
+@bot.command()
+async def sebastian(ctx):
+    """Sebastian"""
+    sebastian =  discord.Embed(title="Support Developer ❤️",
+                         description="Follow on [Insta]("
+                                     "https://www.instagram.com/sebasti4n.exe/) ❤️", color=0x89CFF0)
+    await ctx.send(embed=sebastian)
+
 
 @bot.command(aliases=['hentai', 'hanime'])
 async def _hentai(ctx, id):
