@@ -16,8 +16,10 @@ bot = commands.Bot(command_prefix=PREFIX,
 
 
 @bot.command()
+
 async def load(ctx, extension):
     bot.load_extension(f'cogs.{extension}')
+
     
 @bot.command()
 async def unload(ctx, extension):
