@@ -1,9 +1,11 @@
-import requests 
-import discord 
+import requests
+import discord
+from discord.ext import commands
 
-class Capybara():
-    def __init__(self):
+class Capybara(commands.Cog):
+    def __init__(self, bot):
         self.url = 'https://unsplash.com/ngetty/v3/search/images/creative/by-image?image_url=https%3A%2F%2Fs3.us-west-2.amazonaws.com%2Fimages.unsplash.com%2Fsmall%2Fphoto-1525434280327-e525e03f17ef&fields=display_set%2Creferral_destinations%2Ctitle&page_size=200'
+        self.bot = bot
         
     def capybara_api(self):
         request = requests.get(self.url)
@@ -22,10 +24,13 @@ class Capybara():
         capybara_title = images[random_url]['title']
         return capybara_image, capybara_title
     
-    
-    def capybara(self, ctx):
+    @commands.command()
+    async def capybara(self, ctx):
         url = self.query_capybara()
         embed = discord.Embed(color = 0xf7f1e3,
                               title = f"<:capybara:983651457549086741> {url[1]}")
         embed.set_image(url = url[0])
-        return ctx.send(embed=embed)
+        await ctx.send(embed=embed)
+
+def setup(bot):
+    bot.add_cog(Capybara(bot))

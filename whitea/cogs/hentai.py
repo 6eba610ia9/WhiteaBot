@@ -1,16 +1,15 @@
 import discord
-from discord.ext import commands
 import requests, re
 from bs4 import BeautifulSoup
 import json
 from datetime import datetime
+from discord.ext import commands
 
 
-class Hentai:
+class Hentai(commands.Cog):
     
-    def __init__(self, bot, id):
+    def __init__(self, bot):
         """ Initialize Class"""
-        self.id = id
         self.bot = bot
 
         
@@ -18,14 +17,13 @@ class Hentai:
         url = f"https://t.dogehls.xyz/galleries/{media_id}/{page}.jpg"
         return url
 
-    def hentai_api(self):
-        id = self.id
+    def hentai_api(self, id):
         url = f"https://nhentai.to/g/{id}/1"
         request = requests.get(url)
         if request.status_code == 200:
             html = request.text
             soup = BeautifulSoup(html, "html.parser")
-            script = soup.find_all("script")[4].text
+            script = soup.find_all("script")[5].text
             regex = re.search(r"gallery: {.*?},(\s+)(\w)", script, re.DOTALL).group(0)[9:-20]
             api = json.loads(regex + "}")
             return api
@@ -34,9 +32,9 @@ class Hentai:
             return "404"
     
     
-    def thubnail_embed(self):
+    def thubnail_embed(self, id):
         
-        api = self.hentai_api()
+        api = self.hentai_api(id=id)
         title = api["title"]["pretty"]
         title_japanese = api["title"]["japanese"]
         
@@ -51,7 +49,7 @@ class Hentai:
         
         embed = discord.Embed(
             title = title,
-            description = f"[{title_japanese}](https://nhentai.to/g/{self.id})",
+            description = f"[{title_japanese}](https://nhentai.to/g/{id})",
             color = 0x89CFF0
         )
         
@@ -64,25 +62,25 @@ class Hentai:
         
         return embed
                         
+    @commands.command()
+    async def hentai(self, ctx, id):
+            api = self.hentai_api(id=id)
 
-    async def hentai(self, ctx):
-            api = self.hentai_api()
             num_pages = api["num_pages"]
             media_id = api["media_id"]
 
                 
             for page in range (1, num_pages):
                 image = self.hentai_img(media_id=media_id, page=page)
-                embed = self.thubnail_embed()
-
+                embed = self.thubnail_embed(id=id)
                 if page == 1:
                     img = ctx.send(embed=embed)
-                    return img
+                    await img
                 else: 
-                    img.edit(content=image)
+                    await img.edit(content=image)
 
-                    img.add_reaction("⬅️")
-                    img.add_reaction("➡️")
+                    await img.add_reaction("⬅️")
+                    await img.add_reaction("➡️")
                 
                 valid_reactions = ["⬅️", "➡️"]
 
@@ -92,6 +90,9 @@ class Hentai:
 
                 if str(reaction.emoji) == "➡️":
                     continue
+                
+def setup(bot):
+    bot.add_cog(Hentai(bot))
                 
                 
                 
