@@ -1,22 +1,22 @@
 import discord
 from discord.ext import commands
-from variables.token import TOKEN
-from variables.prefix import PREFIX
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
+
+TOKEN = os.getenv("BOT_TOKEN")
+PREFIX = os.getenv("BOT_PREFIX")
 
 activity = discord.Activity(type=discord.ActivityType.watching, name="sexy capybara")
 
 bot = commands.Bot(command_prefix=PREFIX, 
                    help_command=None, 
-                   status=discord.Status.idle, 
+                   status=discord.Status.online, 
                    activity=activity)
 
 
-
-
-
 @bot.command()
-
 async def load(ctx, extension):
     bot.load_extension(f'cogs.{extension}')
 
