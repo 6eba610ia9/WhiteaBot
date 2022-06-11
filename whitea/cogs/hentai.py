@@ -7,7 +7,7 @@ from discord.ext import commands
 
 
 class Hentai(commands.Cog):
-    
+    """Return images, title and descriptions from hanimes"""
     def __init__(self, bot):
         """ Initialize Class"""
         self.bot = bot
@@ -24,7 +24,8 @@ class Hentai(commands.Cog):
             html = request.text
             soup = BeautifulSoup(html, "html.parser")
             script = soup.find_all("script")[5].text
-            regex = re.search(r"gallery: {.*?},(\s+)(\w)", script, re.DOTALL).group(0)[9:-20]
+            regex = re.search(r"gallery: {.*?},(\s+)(\w)", script, re.DOTALL)
+            regex.group(0)[9:-20]
             api = json.loads(regex + "}")
             return api
             
@@ -32,7 +33,7 @@ class Hentai(commands.Cog):
             return "404"
     
     
-    def thubnail_embed(self, id):
+    def embed(self, id):
         
         api = self.hentai_api(id=id)
         title = api["title"]["pretty"]
@@ -52,9 +53,9 @@ class Hentai(commands.Cog):
             description = f"[{title_japanese}](https://nhentai.to/g/{id})",
             color = 0x89CFF0
         )
-        
         embed.set_thumbnail(url=thubnail)
         embed.add_field(name="Num pages", value=num_pages, inline=False)
+        embed.add_field(name='----------------------------------------------------------------------------', value = "**----------------------------------------------------------------------------**", inline=False)
         embed.add_field(name="Uploaded at", value=upload_date, inline=False)
         
         for tag in api["tags"]:
@@ -72,7 +73,7 @@ class Hentai(commands.Cog):
                 
             for page in range (1, num_pages):
                 image = self.hentai_img(media_id=media_id, page=page)
-                embed = self.thubnail_embed(id=id)
+                embed = self.embed(id=id)
                 if page == 1:
                     img = ctx.send(embed=embed)
                     await img

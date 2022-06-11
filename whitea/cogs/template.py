@@ -7,7 +7,7 @@ class Template(commands.Cog):
        
     # All you have to add is here:   
     @commands.command()
-    async def run(ctx, params):
+    async def run(self, ctx, params):
         await ctx.send(params)
 
     

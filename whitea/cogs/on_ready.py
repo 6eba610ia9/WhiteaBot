@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 
 class OnReady(commands.Cog):
+    """On ready bot default message"""
     def __init__(self, bot):
         self.bot = bot
        

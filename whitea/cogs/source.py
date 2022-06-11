@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 
 class Source(commands.Cog):
+    """Source of project (github and others)"""
     def __init__(self, bot):
         self.bot = bot
     

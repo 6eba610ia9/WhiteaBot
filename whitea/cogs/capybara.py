@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 
 class Capybara(commands.Cog):
+    """Return a random image with capybara"""
     def __init__(self, bot):
         self.url = 'https://unsplash.com/ngetty/v3/search/images/creative/by-image?image_url=https%3A%2F%2Fs3.us-west-2.amazonaws.com%2Fimages.unsplash.com%2Fsmall%2Fphoto-1525434280327-e525e03f17ef&fields=display_set%2Creferral_destinations%2Ctitle&page_size=200'
         self.bot = bot

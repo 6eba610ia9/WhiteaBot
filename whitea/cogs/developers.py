@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 
 class Developers(commands.Cog):
+    """About bot developers"""
     def __init__(self, bot):
         self.bot = bot
        

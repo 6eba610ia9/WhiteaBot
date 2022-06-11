@@ -5,6 +5,7 @@ from discord.ext import commands
 
 
 class Neko(commands.Cog):
+    """Random neko image generator"""
     def __init__(self, bot):
         self.bot = bot
         

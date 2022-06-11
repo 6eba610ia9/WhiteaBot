@@ -4,6 +4,7 @@ import json
 from requests import get
 
 class Template(commands.Cog):
+    """Random meme generator"""
     def __init__(self, bot):
         self.bot = bot
        
