@@ -1,7 +1,5 @@
-import os
 import random 
 
-from PIL import Image
 import discord
 from discord.ext import commands
 
@@ -10,16 +8,17 @@ class Dice(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
          
-    @commands.command()
-    async def dice(self, ctx):
-        imgList = os.listdir("C:/Users/Zet/Documents/bot/whitea/cogs/dice") # Creates a list of filenames from your folder
-
-        imgString = random.choice(imgList) # Selects a random element from the list
-
-        path = "C:/Users/Zet/Documents/bot/whitea/cogs/dice/" + imgString # Creates a string for the path to the file
-
-        await ctx.send_file(path) # Sends the image in the channel the command was used
-
+    @commands.Cog.listener("on_message")
+    async def dice(self, message):
+        if message.author.bot:
+            return
+        if message == "🎲" or ":game_die:":
+            dice_nr = random.randint(1, 6)
+            url = f"https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/whitea/assets/dice/{dice_nr}.gif"
+            
+            embed = discord.Embed(color=discord.Color.random())
+            embed.set_image(url=url)
+            await message.channel.send(embed = embed)
 
     
 def setup(bot):
