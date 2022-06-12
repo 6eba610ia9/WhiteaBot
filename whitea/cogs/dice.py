@@ -13,27 +13,16 @@ class Dice(commands.Cog):
     async def dice(self, message):
         if message.author.bot:
             return
-        if message == "🎲" or ":game_die:":
+        if message.content.startswith("🎲"):
             dice_nr = random.randint(1, 6)
             url = f"https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/whitea/assets/dice/{dice_nr}.gif"
             
             embed = discord.Embed(color=discord.Color.random())
-            # embed.set_image(url=url)
-            
-            
+            embed.set_image(url=url)
 
-        
-            file = discord.File(fp=f"./whitea/cogs/dice/{dice_nr}.gif")
-                
-            # embed.set_image(url=file)
-            
-            # embed.set_image(url=f"attachment://dice/{dice_nr}.gif")
-            
-            await message.channel.send(file=file)
+            await message.channel.send(embed=embed)
             
 
     
 def setup(bot):
     bot.add_cog(Dice(bot))
-
-
