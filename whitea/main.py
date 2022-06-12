@@ -42,4 +42,4 @@ for filename in os.listdir('./whitea/cogs'):
 
 
 
-bot.run(TEST_BOT_TOKEN)
+bot.run(TOKEN)
