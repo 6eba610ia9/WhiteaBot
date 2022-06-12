@@ -8,20 +8,22 @@ class Developers(commands.Cog):
        
     
     @commands.command()
-    async def zet(self, ctx):
+    async def zet(self, message):
         """Zet"""
         zet =  discord.Embed(title="Support Developer ❤️",
                             description="Follow on  [Insta]("
-                                        "https://www.instagram.com/justzetu/) 👀", color=0x89CFF0)
-        await ctx.send(embed=zet)
+                                        "https://www.instagram.com/justzetu/) 👀", 
+                                        color=discord.Colour.random())
+        await message.send(embed=zet)
 
     @commands.command()
-    async def sebastian(self, ctx):
+    async def sebastian(self, message):
         """Sebastian"""
         sebastian =  discord.Embed(title="Support Developer ❤️",
                             description="Follow on [Insta]("
-                                        "https://www.instagram.com/sebasti4n.exe/) ❤️", color=0x89CFF0)
-        await ctx.send(embed=sebastian)
+                                        "https://www.instagram.com/sebasti4n.exe/) ❤️", 
+                                        color=discord.Colour.random())
+        await message.send(embed=sebastian)
 
     
 def setup(bot):

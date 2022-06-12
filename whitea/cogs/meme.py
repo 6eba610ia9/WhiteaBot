@@ -10,7 +10,7 @@ class Template(commands.Cog):
        
     
     @commands.command()
-    async def meme(self, ctx):
+    async def meme(self, message):
         content = get("https://meme-api.herokuapp.com/gimme").text
         data = json.loads(content)
         title = data['title']
@@ -19,7 +19,7 @@ class Template(commands.Cog):
                              Color = discord.Color.random())
         embed.set_image(url=url)
         
-        await ctx.reply(embed=embed)
+        await message.reply(embed=embed)
 
 def setup(bot):
     bot.add_cog(Template(bot))

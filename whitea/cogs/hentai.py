@@ -51,7 +51,7 @@ class Hentai(commands.Cog):
         embed = discord.Embed(
             title = title,
             description = f"[{title_japanese}](https://nhentai.to/g/{id})",
-            color = 0x89CFF0
+            color = discord.Colour.random()
         )
         embed.set_thumbnail(url=thubnail)
         embed.add_field(name="Num pages", value=num_pages, inline=False)
@@ -64,7 +64,7 @@ class Hentai(commands.Cog):
         return embed
                         
     @commands.command()
-    async def hentai(self, ctx, id):
+    async def hentai(self, message, id):
             api = self.hentai_api(id=id)
 
             num_pages = api["num_pages"]
@@ -75,7 +75,7 @@ class Hentai(commands.Cog):
                 image = self.hentai_img(media_id=media_id, page=page)
                 embed = self.embed(id=id)
                 if page == 1:
-                    img = ctx.send(embed=embed)
+                    img = message.send(embed=embed)
                     await img
                 else: 
                     await img.edit(content=image)
@@ -86,7 +86,7 @@ class Hentai(commands.Cog):
                 valid_reactions = ["⬅️", "➡️"]
 
                 def check(reaction, user):
-                    return user == ctx.author and str(reaction.emoji) in valid_reactions
+                    return user == message.author and str(reaction.emoji) in valid_reactions
                 reaction, user = await self.bot.wait_for('reaction_add', timeout=60.0, check=check)
 
                 if str(reaction.emoji) == "➡️":

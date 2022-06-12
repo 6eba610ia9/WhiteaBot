@@ -8,7 +8,7 @@ class Help(commands.Cog):
        
        
     @commands.command()
-    async def help(self, ctx):
+    async def help(self, message):
         """About Whitea and discord server."""
         embed =  discord.Embed(       
             title="Whitea",
@@ -28,7 +28,7 @@ class Help(commands.Cog):
             text="Whitea bot.",
             icon_url="https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/assets/whitea_rounded.png")
             
-        await ctx.send(embed = embed)
+        await message.send(embed = embed)
         
 def setup(bot):
     bot.add_cog(Help(bot))

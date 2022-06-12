@@ -23,7 +23,7 @@ class Neko(commands.Cog):
                          color=0xFF0000)
 
 
-    def neko_api(self, ctx, x):
+    def neko_api(self, message, x):
         try:
             req = requests.get(f'https://nekos.life/api/v2/img/{x}')
             if req.status_code != 200:
@@ -36,60 +36,60 @@ class Neko(commands.Cog):
             return self.error(f"obtaining image ({req.status_code})")
 
     @commands.command()
-    async def neko(self, ctx):
-        await ctx.send(embed=self.neko_api(ctx, "neko"))
+    async def neko(self, message):
+        await message.send(embed=self.neko_api(message, "neko"))
 
     @commands.command()
-    async def waifu(self, ctx):
-        await ctx.send(embed=self.neko_api(ctx, "waifu"))
+    async def waifu(self, message):
+        await message.send(embed=self.neko_api(message, "waifu"))
 
     @commands.command()
-    async def avatar(self, ctx):
-        await ctx.send(embed=self.neko_api(ctx, "avatar"))
+    async def avatar(self, message):
+        await message.send(embed=self.neko_api(message, "avatar"))
 
     @commands.command()
-    async def wallpaper(self, ctx):
-        await ctx.send(embed=self.neko_api(ctx, "wallpaper"))
+    async def wallpaper(self, message):
+        await message.send(embed=self.neko_api(message, "wallpaper"))
 
     @commands.command()
-    async def tickle(self, ctx):
-        await ctx.send(embed=self.neko_api(ctx, "tickle"))
+    async def tickle(self, message):
+        await message.send(embed=self.neko_api(message, "tickle"))
 
     @commands.command()
-    async def poke(self, ctx):
-        await ctx.send(embed=self.neko_api(ctx, "poke"))
+    async def poke(self, message):
+        await message.send(embed=self.neko_api(message, "poke"))
 
     @commands.command()
-    async def kiss(self, ctx):
-        await ctx.send(embed=self.neko_api(ctx, "kiss"))
+    async def kiss(self, message):
+        await message.send(embed=self.neko_api(message, "kiss"))
 
     @commands.command(aliases=['8ball'])
-    async def eightball(self, ctx):
-        await ctx.send(embed=self.neko_api(ctx, "8ball"))
+    async def eightball(self, message):
+        await message.send(embed=self.neko_api(message, "8ball"))
 
     @commands.command()
-    async def lizard(self, ctx):
-        await ctx.send(embed=self.neko_api(ctx, "lizard"))
+    async def lizard(self, message):
+        await message.send(embed=self.neko_api(message, "lizard"))
 
     @commands.command()
-    async def slap(self, ctx):
-        await ctx.send(embed=self.neko_api(ctx, "slap"))
+    async def slap(self, message):
+        await message.send(embed=self.neko_api(message, "slap"))
 
     @commands.command()
-    async def cuddle(self, ctx):
-        await ctx.send(embed=self.neko_api(ctx, "cuddle"))
+    async def cuddle(self, message):
+        await message.send(embed=self.neko_api(message, "cuddle"))
 
     @commands.command()
-    async def goose(self, ctx):
-        await ctx.send(embed=self.neko_api(ctx, "goose"))
+    async def goose(self, message):
+        await message.send(embed=self.neko_api(message, "goose"))
 
     @commands.command()
-    async def fox_girl(self, ctx):
-        await ctx.send(embed=self.neko_api(ctx, "fox_girl"))
+    async def fox_girl(self, message):
+        await message.send(embed=self.neko_api(message, "fox_girl"))
 
     @commands.command()
-    async def baka(self, ctx):
-        await ctx.send(embed=self.neko_api(ctx, "baka"))
+    async def baka(self, message):
+        await message.send(embed=self.neko_api(message, "baka"))
         
         
 def setup(bot):

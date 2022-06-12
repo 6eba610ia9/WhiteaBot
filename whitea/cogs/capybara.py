@@ -26,12 +26,12 @@ class Capybara(commands.Cog):
         return capybara_image, capybara_title
     
     @commands.command()
-    async def capybara(self, ctx):
+    async def capybara(self, message):
         url = self.query_capybara()
-        embed = discord.Embed(color = 0xf7f1e3,
-                              title = f"<:capybara:983651457549086741> {url[1]}")
+        embed = discord.Embed(color = discord.Colour.random(),
+                              title = f"{url[1]}")
         embed.set_image(url = url[0])
-        await ctx.send(embed=embed)
+        await message.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Capybara(bot))

@@ -19,18 +19,11 @@ class Dice(commands.Cog):
 
             dice_nr = random.randint(1, 6)
             gif = f"https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/assets/dice_gif/{dice_nr}.gif"
-            png = f"https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/assets/dice_png/{dice_nr}.png"
             
             embed = discord.Embed(color=discord.Color.random())
             embed.set_thumbnail(url=gif)
 
-            msg = await message.channel.send(embed=embed)
-            await asyncio.sleep(5)
-            
-            
-            embed.set_thumbnail(url=png)
-            
-            await msg.edit(embed=embed)
+            await message.channel.send(embed=embed)
             
 
 
