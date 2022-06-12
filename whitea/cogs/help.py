@@ -15,7 +15,7 @@ class Help(commands.Cog):
             description="[Open source discord bot.](https://github.com/6eba610ia9/WhiteaBot)",
             color=0xe8e9f0)
         
-        embed.set_thumbnail(url="https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/whitea/assets/whitea.jpg")
+        embed.set_thumbnail(url="https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/assets/whitea.jpg")
         embed.add_field(name="-capybara",
                         value="Generate a random capybara image.",
                         inline=True)
@@ -26,7 +26,7 @@ class Help(commands.Cog):
         
         embed.set_footer(
             text="Whitea bot.",
-            icon_url="https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/whitea/assets/whitea_rounded.png")
+            icon_url="https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/assets/whitea_rounded.png")
             
         await ctx.send(embed = embed)
         

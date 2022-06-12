@@ -13,7 +13,7 @@ class Neko(commands.Cog):
     def newembed(self, text):
         em = discord.Embed(colour=discord.Colour.random())
         em.set_footer(text=f"Here's your {text}",
-                    icon_url="https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/whitea/assets/whitea_rounded.png")
+                    icon_url="https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/assets/whitea_rounded.png")
 
         return em
     
