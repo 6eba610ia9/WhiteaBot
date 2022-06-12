@@ -18,7 +18,7 @@ class Dice(commands.Cog):
             url = f"https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/whitea/assets/dice/{dice_nr}.gif"
             
             embed = discord.Embed(color=discord.Color.random())
-            embed.set_image(url=url)
+            embed.set_thumbnail(url=url)
 
             await message.channel.send(embed=embed)
             
