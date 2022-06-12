@@ -23,7 +23,7 @@ class Dice(commands.Cog):
 
             embed.set_thumbnail(url=url)
 
-            await message.channel.send(embed=embed)
+            await message.reply(embed=embed)
             
 
 
