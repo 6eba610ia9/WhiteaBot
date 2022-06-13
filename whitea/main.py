@@ -12,11 +12,6 @@ PREFIX = os.getenv("BOT_PREFIX")
 
 activity = discord.Activity(type=discord.ActivityType.watching, name="sexy capybara")
 
-# def command_prefix(bot, message):
-#     if message.guild is None:
-#         return ''
-#     else:
-#         return '?'
 
 bot = commands.Bot(command_prefix=PREFIX, 
                    help_command=None, 
