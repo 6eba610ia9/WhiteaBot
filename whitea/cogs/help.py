@@ -25,7 +25,6 @@ class Help(commands.Cog):
                 string = f"{white_spaces} {element}"
                 print(string)
             
-        commands()
         embed =  discord.Embed(       
             title="Whitea",
             color=0xe8e9f0)

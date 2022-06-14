@@ -4,6 +4,7 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
 TOKEN = os.getenv("BOT_TOKEN")
@@ -16,7 +17,9 @@ activity = discord.Activity(type=discord.ActivityType.watching, name="sexy capyb
 bot = commands.Bot(command_prefix=PREFIX, 
                    help_command=None, 
                    status=discord.Status.online, 
-                   activity=activity)
+                   activity=activity,
+
+                   )
 
 
 @bot.command()
