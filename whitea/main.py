@@ -11,7 +11,9 @@ TOKEN = os.getenv("BOT_TOKEN")
 TEST_BOT_TOKEN = os.getenv("TEST_BOT_TOKEN")
 PREFIX = os.getenv("BOT_PREFIX")
 
-activity = discord.Activity(type=discord.ActivityType.watching, name="-help")
+activity = discord.Activity(type=discord.ActivityType.watching, 
+                            details="Hello",
+                            name="-help")
 
 
 bot = commands.Bot(command_prefix=PREFIX, 
@@ -19,7 +21,6 @@ bot = commands.Bot(command_prefix=PREFIX,
                    status=discord.Status.online, 
                    activity=activity,
                    )
-
 
 @bot.command()
 async def load(ctx, extension):
@@ -38,5 +39,4 @@ for filename in os.listdir('./whitea/cogs'):
 
 
 
-
-bot.run(TEST_BOT_TOKEN)
+bot.run(TOKEN)
