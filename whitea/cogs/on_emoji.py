@@ -73,7 +73,7 @@ class Dice(commands.Cog):
 
         if message.content.startswith("🪨", "📜", "✂️"):
 
-            rps_nr = random.randint(1, 8)
+            rps_nr = random.randint(1, 3)
             gif = f"https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/assets/rock%20paper%20scrissors/{rps_nr}.gif"
             
             embed = discord.Embed(color=discord.Color.random())
