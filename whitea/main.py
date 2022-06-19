@@ -11,16 +11,16 @@ TOKEN = os.getenv("BOT_TOKEN")
 TEST_BOT_TOKEN = os.getenv("TEST_BOT_TOKEN")
 PREFIX = os.getenv("BOT_PREFIX")
 
-activity = discord.Activity(type=discord.ActivityType.watching, name="sexy capybara")
+activity = discord.Activity(type=discord.ActivityType.watching, 
+                            details="Hello",
+                            name="-help")
 
 
 bot = commands.Bot(command_prefix=PREFIX, 
                    help_command=None, 
                    status=discord.Status.online, 
                    activity=activity,
-
                    )
-
 
 @bot.command()
 async def load(ctx, extension):
@@ -36,7 +36,6 @@ for filename in os.listdir('./whitea/cogs'):
     """Get all commands from cogs"""
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
-
 
 
 

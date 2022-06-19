@@ -16,7 +16,6 @@ class Help(commands.Cog):
         white_spaces = "\u200b \u200b \u200b \u200b \u200b \u200b \u200b \u200b \u200b"
         
         def commands():
-            white_spaces = "\u200b \u200b \u200b \u200b \u200b \u200b \u200b \u200b \u200b"
             emojis = ["Neko", "Waifu"]
             commands = ["-neko", "-waifu"]
             description = ["return neko image", "return waifu image"]
@@ -27,7 +26,7 @@ class Help(commands.Cog):
             
         embed =  discord.Embed(       
             title="Whitea",
-            color=0xe8e9f0)
+            color=discord.Color.random())
         
         embed.set_thumbnail(url="https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/assets/whitea.jpg")
         embed.add_field(name="<:p_milk:985813348039942214> Neko:",
