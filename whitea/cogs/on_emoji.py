@@ -51,6 +51,21 @@ class Dice(commands.Cog):
         if message.content.startswith("🎱"):
             await message.channel.send(embed=self.neko_api(message))
 
+    @commands.Cog.listener("on_message")
+    async def coin(self, message):
+        if message.author.bot:
+            return
+
+        if message.content.startswith("🪙"):
+
+            coin_nr = random.randint(1, 8)
+            gif = f"https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/assets/head_and_tails/{coin_nr}.gif"
+            
+            embed = discord.Embed(color=discord.Color.random())
+            embed.set_thumbnail(url=gif)
+
+            await message.channel.send(embed=embed)
+
 
     
 def setup(bot):
