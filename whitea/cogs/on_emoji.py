@@ -59,13 +59,12 @@ class Dice(commands.Cog):
         if message.content.startswith("🪙"):
 
             coin_nr = random.randint(1, 8)
-            gif = f"https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/assets/head_and_tails/{coin_nr}.gif"
+            gif = f"https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/assets/heads%20and%20tails/{coin_nr}.gif"
             
             embed = discord.Embed(color=discord.Color.random())
             embed.set_thumbnail(url=gif)
 
             await message.channel.send(embed=embed)
-
 
     
 def setup(bot):
