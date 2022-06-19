@@ -11,7 +11,7 @@ class BassicCommands(commands.Cog):
     @commands.command()
     
     async def gay(self, message, member=None):
-        procents = random.randint(100, 465)
+        procents = random.randint(0, 100)
         # if author don't tag anyone
         if member is None:
             embed = discord.Embed(colour=discord.Colour.random(), 
