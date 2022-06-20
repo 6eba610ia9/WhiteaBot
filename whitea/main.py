@@ -38,5 +38,4 @@ for filename in os.listdir('./whitea/cogs'):
         bot.load_extension(f'cogs.{filename[:-3]}')
 
 
-
 bot.run(TOKEN)

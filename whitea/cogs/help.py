@@ -28,7 +28,7 @@ class Help(commands.Cog):
             title="Whitea",
             color=discord.Color.random())
         
-        embed.set_thumbnail(url="https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/assets/whitea.jpg")
+        embed.set_thumbnail(url="https://raw.githubusercontent.com/6eba610ia9/WhiteaBot/master/assets/whitea.png")
         embed.add_field(name="<:p_milk:985813348039942214> Neko:",
                         value=
                         f"{white_spaces}<:p_coffies:985813365739892756> **-neko:** Shows a neko image \n"
@@ -56,8 +56,11 @@ class Help(commands.Cog):
         
                 
         embed.add_field(name="<a:g_dia:985813353844862996> Utility:",
-                        value=f"{white_spaces} You can only send 🎲 in chat and the bot will reply with a dice gif. \n",
+                        value=f"{white_spaces} Send 🎲 in chat and the bot will reply with a dice gif. \n"
+                            f"{white_spaces} Send 🪙 in chat to play head and tails. \n"
+                            f"{white_spaces}:smirk: **-hentai** *id* Shows info about hentai. ",
                         inline=False)
+        
         
         
         embed.set_footer(

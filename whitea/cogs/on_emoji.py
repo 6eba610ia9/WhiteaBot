@@ -7,7 +7,7 @@ import discord
 from discord.ext import commands
 
 
-class Dice(commands.Cog):
+class OnEmoji(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         
@@ -18,6 +18,7 @@ class Dice(commands.Cog):
         
     
     @commands.Cog.listener("on_message")
+    
     async def dice(self, message):
         if message.author.bot:
             return
@@ -31,27 +32,7 @@ class Dice(commands.Cog):
             embed.set_thumbnail(url=gif)
 
             await message.channel.send(embed=embed)
-        
-    def neko_api(self, message):
-        try:
-            req = requests.get(f'https://nekos.life/api/v2/img/8ball')
-            apijson = req.json()
-            url = apijson["url"]
-            embed = discord.Embed(colour=discord.Colour.random())
-            embed.set_image(url=url)
-            return embed
-        except:
-            return self.error(f"obtaining image ({req.status_code})")   
-             
-    @commands.Cog.listener("on_message")
-    async def dice(self, message):
-        if message.author.bot:
-            return
-
-        if message.content.startswith("🎱"):
-            await message.channel.send(embed=self.neko_api(message))
-
-    @commands.Cog.listener("on_message")
+            
     async def coin(self, message):
         if message.author.bot:
             return
@@ -65,7 +46,27 @@ class Dice(commands.Cog):
             embed.set_thumbnail(url=gif)
 
             await message.channel.send(embed=embed)
+            
+    def eightball(self, message):
+        try:
+            req = requests.get(f'https://nekos.life/api/v2/img/8ball')
+            apijson = req.json()
+            url = apijson["url"]
+            embed = discord.Embed(colour=discord.Colour.random())
+            embed.set_image(url=url)
+            return embed
+        except:
+            return self.error(f"obtaining image ({req.status_code})")   
+             
+    @commands.Cog.listener("on_message")
+    async def ball8(self, message):
+        if message.author.bot:
+            return
+
+        if message.content.startswith("🎱"):
+            await message.channel.send(embed=self.eightball(message))
+
 
     
 def setup(bot):
-    bot.add_cog(Dice(bot))
+    bot.add_cog(OnEmoji(bot))

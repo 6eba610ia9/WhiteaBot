@@ -19,9 +19,9 @@ class Hentai():
         if request.status_code == 200:
             html = request.text
             soup = BeautifulSoup(html, "html.parser")
-            script = soup.find_all("script")[5].text
-            regex = re.search(r"gallery: {.*?},(\s+)(\w)", script, re.DOTALL)
-            regex.group(0)[9:-20]
+            script = soup.find_all("script")[4].text
+            regex = re.search(r"N\.gallery(\(.*\))", script, re.DOTALL)
+            # regex.group(0)[9:-20]
             return regex
             api = json.loads(regex + "}")
             return api
